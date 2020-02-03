@@ -1,28 +1,20 @@
+import org.xtext.example.mydsl.generator.MMLLoader;
+import org.xtext.example.mydsl.mml.MMLModel;
+
 import io.javalin.Javalin;
 import io.javalin.core.util.FileUtil;
-import java.util.HashMap;
-import java.util.Map;
 
 public class Main {
 
-    private static Map<String, String> reservations = new HashMap<String, String>() {{
-        put("saturday", "No reservation");
-        put("sunday", "No reservation");
-    }};
-
+  
     public static void main(String[] args) {
 
         Javalin app = Javalin.create(config -> {
             config.addStaticFiles("/public");
-        }).start(7070);
+        }).start(8080);
 
-        app.post("/make-reservation", ctx -> {
-            reservations.put(ctx.formParam("day"), ctx.formParam("time"));
-            ctx.html("Your reservation has been saved");
-        });
-
-        app.get("/check-reservation", ctx -> {
-            ctx.html(reservations.get(ctx.queryParam("day")));
+        app.get("/generate", ctx -> {
+            ctx.html("Your MML " + processMML(ctx.queryParam("mml")) + " will be processed");
         });
 
         app.post("/upload-example", ctx -> {
@@ -33,6 +25,12 @@ public class Main {
         });
 
     }
+
+	private static String processMML(String mmlContent) {
+		MMLLoader mmlLoader = new MMLLoader();	    
+		MMLModel mml = mmlLoader.loadModel(mmlContent);
+		return mml.getInput().toString();
+	}
 
 }
 

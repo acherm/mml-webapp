@@ -28,6 +28,10 @@
 			<attribute name="maven.pomderived" value="true"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry kind="lib" path="/Users/macher1/Desktop/mml.jar"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/org.xtext.example.mml"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/org.xtext.example.mml.ide"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/org.xtext.example.mml.tests"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/org.xtext.example.mml.ui"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/org.xtext.example.mml.ui.tests"/>
 	<classpathentry kind="output" path="target/classes"/>
 </classpath>

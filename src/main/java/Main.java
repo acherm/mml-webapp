@@ -1,4 +1,3 @@
-import org.xtext.example.mydsl.generator.MMLLoader;
 import org.xtext.example.mydsl.mml.MMLModel;
 
 import io.javalin.Javalin;
@@ -13,8 +12,8 @@ public class Main {
             config.addStaticFiles("/public");
         }).start(8080);
 
-        app.get("/generate", ctx -> {
-            ctx.html("Your MML " + processMML(ctx.queryParam("mml")) + " will be processed");
+        app.post("/generate", ctx -> {
+            ctx.html("Your MML " + processMML(ctx.formParam("mml")) + " will be processed");
         });
 
         app.post("/upload-example", ctx -> {
@@ -29,6 +28,7 @@ public class Main {
 	private static String processMML(String mmlContent) {
 		MMLLoader mmlLoader = new MMLLoader();	    
 		MMLModel mml = mmlLoader.loadModel(mmlContent);
+		// TODO: call your compiler!
 		return mml.getInput().toString();
 	}
 
